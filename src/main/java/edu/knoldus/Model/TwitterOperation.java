@@ -141,28 +141,5 @@ public class TwitterOperation {
         });
     }
 
-    public CompletableFuture<List<Status>> getLikesIn15Min() {
-        return CompletableFuture.supplyAsync(() -> {
-            List<Status> latestTweets = new ArrayList<>();
-            try {
-                String hashTag = "#IncredibleIndia";
-                LocalDateTime sinceDate = LocalDateTime.of(2018, 03, 11, 05,22,50);
-                LocalDateTime untilDate = LocalDateTime.of(2018, 03, 11, 05,37,00);
 
-                Integer count = 100;
-                Query query = new Query(hashTag);
-                query.setSince(sinceDate.toString());
-                query.setUntil(untilDate.toString());
-                query.setCount(count);
-
-                query.resultType(Query.RECENT);
-                QueryResult queryResult = this.twitter.search(query);
-                latestTweets.addAll(queryResult.getTweets());
-                System.out.println("Number of tweets Likes within 15 Minutes are : " + latestTweets.size());
-            } catch (TwitterException e) {
-                e.printStackTrace();
-            }
-            return latestTweets;
-        });
-    }
 }
